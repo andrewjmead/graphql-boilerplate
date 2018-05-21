@@ -7,8 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
+    "start": "babel src -d dist && cp ./src/graphql/schema.gql  ./dist/graphql/ && node dist/index.js",
+    "dev": "nodemon src/index.js --ext js,gql --exec babel-node",
     "test": "jest"
   },
   "repository": {
@@ -33,6 +33,7 @@
     "apollo-link-http": "^1.5.4",
     "apollo-link-ws": "^1.0.8",
     "apollo-utilities": "^1.0.12",
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-jest": "^22.4.4",
     "babel-preset-env": "^1.7.0",

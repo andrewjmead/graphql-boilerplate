@@ -1,0 +1,29 @@
+{
+  "name": "graphql-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrewjmead/graphql-research-boilerplate.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andrewjmead/graphql-research-boilerplate/issues"
+  },
+  "homepage": "https://github.com/andrewjmead/graphql-research-boilerplate#readme",
+  "dependencies": {
+    "graphql-yoga": "^1.14.0",
+    "nodemon": "^1.17.4"
+  }
+}

@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -25,5 +25,21 @@
   "dependencies": {
     "graphql-yoga": "^1.14.0",
     "nodemon": "^1.17.4"
+  },
+  "devDependencies": {
+    "apollo-cache-inmemory": "^1.2.1",
+    "apollo-client": "^2.3.1",
+    "apollo-link": "^1.2.2",
+    "apollo-link-http": "^1.5.4",
+    "apollo-link-ws": "^1.0.8",
+    "apollo-utilities": "^1.0.12",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^22.4.4",
+    "babel-preset-env": "^1.7.0",
+    "expect": "^22.4.3",
+    "graphql-tag": "^2.9.2",
+    "jest": "^22.4.4",
+    "jest-cli": "^22.4.4",
+    "unfetch": "^3.0.0"
   }
 }

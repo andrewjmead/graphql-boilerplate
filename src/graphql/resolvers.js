@@ -1,4 +1,4 @@
-module.exports.resolvers = {
+const resolvers = {
     Query: {
         hello: () => 'Hello!'
     },
@@ -10,3 +10,5 @@ module.exports.resolvers = {
         }
     }
 }
+
+export { resolvers }

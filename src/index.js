@@ -1,9 +1,9 @@
-const fs = require('fs')
-const path = require('path')
-const { GraphQLServer, PubSub } = require('graphql-yoga')
+import fs from 'fs'
+import path from 'path'
+import { GraphQLServer, PubSub } from 'graphql-yoga'
 
 // GraphQL resolvers and schema
-const { resolvers } = require('./graphql/resolvers')
+import { resolvers } from './graphql/resolvers'
 const schema = fs.readFileSync(path.join(__dirname, './graphql/schema.gql')).toString()
 
 // Setup pub/sub for subscriptions

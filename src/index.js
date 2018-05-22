@@ -2,6 +2,9 @@ import fs from 'fs'
 import path from 'path'
 import { GraphQLServer, PubSub } from 'graphql-yoga'
 
+// Start up the database connection
+import './db/db'
+
 // GraphQL resolvers and schema
 import { resolvers } from './graphql/resolvers'
 const schema = fs.readFileSync(path.join(__dirname, './graphql/schema.gql')).toString()

@@ -2,6 +2,17 @@ type Query {
     hello: String!
 }
 
+type Mutation {
+    signup(email: String!, password: String!): User!
+    login(email: String!, password: String!): User!
+}
+
 type Subscription {
     count: Int!
+}
+
+type User {
+    _id: ID!
+    email: String!
+    authToken: String
 }

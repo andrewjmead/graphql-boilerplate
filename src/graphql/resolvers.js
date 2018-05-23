@@ -24,6 +24,14 @@ const resolvers = {
     Post: {
         author: withAuth(async (obj, args, context) => {
             return User.findById(obj.author)
+        }),
+        comments: withAuth(async (obj, args, context) => {
+            return Comment.find({ post: obj._id })
+        })
+    },
+    Comment: {
+        parent: withAuth(async (obj, args, context) => {
+            return Comment.findOne({ _id: obj.parent })
         })
     },
     Mutation: {
@@ -67,12 +75,15 @@ const resolvers = {
 
             return post
         }),
-        createComment: withAuth(async (obj, { postId, text }, { user }) => {
+        createComment: withAuth(async (obj, { postId, parentId, text }, { user }) => {
             const post = await Post.findOne({ _id: postId, published: true })
 
             if (!post) throw new Error('Unable to find post')
 
             const comment = new Comment({ post: postId, text, author: user._id })
+
+            if (typeof parentId === 'string') comment.parent = parentId
+
             await comment.save()
             return comment
         }),

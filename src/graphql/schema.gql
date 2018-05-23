@@ -31,7 +31,7 @@ type Post {
     title: String!
     body: String!
     published: Boolean!
-    user: User!
+    author: User!
 }
 
 type Comment {

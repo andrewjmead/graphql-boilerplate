@@ -21,7 +21,7 @@ const resolvers = {
         })
     },
     Post: {
-        user: withAuth(async (obj, args, context) => {
+        author: withAuth(async (obj, args, context) => {
             return User.findById(obj.author)
         })
     },

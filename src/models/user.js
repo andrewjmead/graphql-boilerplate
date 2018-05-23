@@ -55,6 +55,18 @@ UserSchema.statics.findByCredentials = async (email, password) => {
     }
 }
 
+// Define middleware to find a user by an auth token
+UserSchema.statics.findByToken = async (token) => {
+    const decoded = jwt.verify(token, 'mysecretauth')
+    const user = await User.findOne({ _id: decoded._id })
+    
+    if (user) {
+        return user
+    } else {
+        throw new Error('Unable to find user')
+    }
+}
+
 // Override toJSON to remove fields from responses
 UserSchema.methods.clean = function () {
     const user = this;

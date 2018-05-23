@@ -1,6 +1,9 @@
+// TODO - Set up some sort of header-based middleware for that token so I can access the user via the content api
+
 import fs from 'fs'
 import path from 'path'
 import { GraphQLServer, PubSub } from 'graphql-yoga'
+import { authMiddleware } from './middleware/auth'
 
 // Start up the database connection
 import './db/db'
@@ -18,14 +21,21 @@ setInterval(() => {
     pubsub.publish('COUNT', { count: count++ })
 }, 1000)
 
+// TODO - Setup the auth middleware
+
 // Define the GraphQL server
 const server = new GraphQLServer({
     typeDefs: schema,
     resolvers,
-    context: {
-        pubsub
+    context({ request }) {
+        return {
+            pubsub,
+            user: request.user            
+        }
     }
 })
+
+server.express.use(authMiddleware)
 
 server.start({
     port: process.env.PORT || 3000

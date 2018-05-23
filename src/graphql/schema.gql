@@ -1,10 +1,16 @@
 type Query {
+    user: User!
     hello: String!
 }
 
 type Mutation {
     signup(email: String!, password: String!): User!
     login(email: String!, password: String!): User!
+    createPost(title: String, body: String): Post!
+    editPost(_id: ID!, title: String, body: String, published: Boolean): Post!
+    deletePost(_id: ID!): Post!
+    # createComment(postId: ID!, text: String!, parentCommentId: ID)
+    # deleteComment(_id: ID!): Comment!
 }
 
 type Subscription {
@@ -15,4 +21,20 @@ type User {
     _id: ID!
     email: String!
     authToken: String
+}
+
+type Post {
+    _id: ID!
+    title: String!
+    body: String!
+    published: Boolean!
+    userId: ID!
+}
+
+type Comment {
+    _id: ID!
+    text: String!
+    parentCommentId: ID
+    postId: ID!
+    userId: ID!
 }

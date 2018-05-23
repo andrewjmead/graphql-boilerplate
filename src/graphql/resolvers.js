@@ -1,5 +1,6 @@
 import User from '../models/user'
 import Post from '../models/post'
+import Comment from '../models/comment'
 import { withAuth } from './withAuth'
 
 const resolvers = {
@@ -65,7 +66,33 @@ const resolvers = {
             if (!post) throw new Error('Unable to find post')
 
             return post
-        })
+        }),
+        createComment: withAuth(async (obj, { postId, text }, { user }) => {
+            const post = await Post.findOne({ _id: postId, published: true })
+
+            if (!post) throw new Error('Unable to find post')
+
+            const comment = new Comment({ post: postId, text, author: user._id })
+            await comment.save()
+            return comment
+        }),
+        editComment: withAuth(async (obj, { _id, text }, { user }) => {
+            const comment = await Comment.findOne({ _id, author: user._id })
+
+            if (!comment) throw new Error('Unable to find comment')
+
+            comment.text = text
+
+            await comment.save()
+            return comment
+        }),
+        deleteComment: withAuth(async (obj, { _id }, { user }) => {
+            const comment = await Comment.findOneAndRemove({ _id, author: user._id })
+
+            if (!comment) throw new Error('Unable to find comment')
+
+            return comment
+        }),
     },
     Subscription: {
         count: {

@@ -11,8 +11,9 @@ type Mutation {
     createPost(title: String, body: String): Post!
     editPost(_id: ID!, title: String, body: String, published: Boolean): Post!
     deletePost(_id: ID!): Post!
-    # createComment(postId: ID!, text: String!, parentCommentId: ID)
-    # deleteComment(_id: ID!): Comment!
+    createComment(postId: ID!, text: String!): Comment!
+    editComment(_id: ID!, text: String!): Comment!
+    deleteComment(_id: ID!): Comment!
 }
 
 type Subscription {
@@ -37,7 +38,6 @@ type Post {
 type Comment {
     _id: ID!
     text: String!
-    parentCommentId: ID
-    postId: ID!
-    userId: ID!
+    post: Post!
+    author: User!
 }

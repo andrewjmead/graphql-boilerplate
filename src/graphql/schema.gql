@@ -1,5 +1,7 @@
 type Query {
     user: User!
+    posts: [Post]!
+    publicPosts: [Post]!
     hello: String!
 }
 
@@ -21,6 +23,7 @@ type User {
     _id: ID!
     email: String!
     authToken: String
+    posts: [Post]!
 }
 
 type Post {
@@ -28,7 +31,7 @@ type Post {
     title: String!
     body: String!
     published: Boolean!
-    userId: ID!
+    user: User!
 }
 
 type Comment {

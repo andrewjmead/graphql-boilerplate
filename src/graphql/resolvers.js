@@ -7,6 +7,22 @@ const resolvers = {
         hello: () => 'Hello!',
         user: withAuth(async (obj, args, { user }) => {
             return user
+        }),
+        posts: withAuth(async (obj, args, { user }) => {
+            return Post.find({ author: user._id })
+        }),
+        publicPosts: withAuth(async (obj, args, { user }) => {
+            return Post.find({ published: true })
+        })
+    },
+    User: {
+        posts: withAuth(async (obj, args, { user }) => {
+            return Post.find({ author: user._id })
+        })
+    },
+    Post: {
+        user: withAuth(async (obj, args, context) => {
+            return User.findById(obj.author)
         })
     },
     Mutation: {

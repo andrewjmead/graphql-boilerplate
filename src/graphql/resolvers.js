@@ -90,7 +90,7 @@ const resolvers = {
 
             return post
         }),
-        createComment: withAuth(async (obj, { postId, parentId, text }, { user }) => {
+        createComment: withAuth(async (obj, { postId, parentId, text }, { user, pubsub }) => {
             const post = await Post.findOne({ _id: postId, published: true })
 
             if (!post) throw new Error('Unable to find post')
@@ -100,6 +100,7 @@ const resolvers = {
             if (typeof parentId === 'string') comment.parent = parentId
 
             await comment.save()
+            pubsub.publish(`COMMENTS_FOR_${comment.post}`, {comments: comment})
             return comment
         }),
         editComment: withAuth(async (obj, { _id, text }, { user }) => {
@@ -121,9 +122,15 @@ const resolvers = {
         }),
     },
     Subscription: {
-        count: {
-            subscribe(obj, args, { pubsub }) {
-                return pubsub.asyncIterator('COUNT')
+        comments: {
+            async subscribe(obj, { postId }, { pubsub }) {
+                const post = await Post.findById(postId)
+
+                if (!post) {
+                    throw new Error('Unable to suscribe to post comments')
+                }
+
+                return pubsub.asyncIterator(`COMMENTS_FOR_${post._id}`)
             }
         }
     }

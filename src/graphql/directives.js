@@ -4,13 +4,15 @@ import { SchemaDirectiveVisitor } from 'graphql-tools'
 class UpperCaseDirective extends SchemaDirectiveVisitor {
     visitFieldDefinition(field) {
         const { resolve = defaultFieldResolver } = field;
-        field.resolve = async function (...args) {
-            const result = await resolve.apply(this, args);
+
+        field.resolve = async (obj, args, context, info) => {
+            const result = await resolve.apply(this, [obj, args, context, info])
+
             if (typeof result === "string") {
                 return result.toUpperCase();
             }
             return result;
-        };
+        }
     }
 }
 

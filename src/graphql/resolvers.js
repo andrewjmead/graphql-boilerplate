@@ -32,6 +32,12 @@ const resolvers = {
     Comment: {
         parent: withAuth(async (obj, args, context) => {
             return Comment.findOne({ _id: obj.parent })
+        }),
+        author: withAuth(async (obj, args, context) => {
+            return User.findById(obj.author)
+        }),
+        post: withAuth(async (obj, args, context) => {
+            return Post.findById(obj.post)
         })
     },
     Mutation: {

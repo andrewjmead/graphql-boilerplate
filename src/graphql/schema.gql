@@ -26,7 +26,7 @@ type Subscription {
 type User {
     _id: ID!
     name: String! 
-    email: String @isUser
+    email: String @isUser # I don't like this approach because it messes up the sign up request
     authToken: String
     posts: [Post]!
 }
@@ -38,6 +38,8 @@ type Post {
     published: Boolean!
     author: User!
     comments: [Comment]!
+    createdAt: String!
+    updatedAt: String!
 }
 
 type Comment {
@@ -46,4 +48,6 @@ type Comment {
     parent: Comment
     post: Post!
     author: User!
+    createdAt: String!
+    updatedAt: String!
 }

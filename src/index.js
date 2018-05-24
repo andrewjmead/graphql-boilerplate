@@ -3,17 +3,17 @@ import path from 'path'
 import { GraphQLServer } from 'graphql-yoga'
 import { UpperCaseDirective, IsUserDirective } from './graphql/directives'
 import { context } from './graphql/context'
+import { resolvers } from './graphql/resolvers'
 
 // Start up the database connection
 import './db/db'
 
-// GraphQL resolvers and schema
-import { resolvers } from './graphql/resolvers'
-const schema = fs.readFileSync(path.join(__dirname, './graphql/schema.gql')).toString()
+// GraphQL schema parser
+const typeDefs = fs.readFileSync(path.join(__dirname, './graphql/schema.gql')).toString()
 
 // Define the GraphQL server
 const server = new GraphQLServer({
-    typeDefs: schema,
+    typeDefs,
     resolvers,
     schemaDirectives: {
         upper: UpperCaseDirective,

@@ -22,7 +22,8 @@ const PostSchema = new mongoose.Schema({
         ref: 'User'
     }
 }, {
-    versionKey: false
+    versionKey: false,
+    timestamps: true
 })
 
 const Post = mongoose.model('Post', PostSchema)

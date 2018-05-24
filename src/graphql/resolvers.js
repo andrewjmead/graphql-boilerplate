@@ -1,7 +1,7 @@
 import User from '../models/user'
 import Post from '../models/post'
 import Comment from '../models/comment'
-import { withAuth } from './withAuth'
+import { withAuth } from './utils/withAuth'
 
 const resolvers = {
     Query: {

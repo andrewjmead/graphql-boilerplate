@@ -20,7 +20,8 @@ const CommentSchema = new mongoose.Schema({
         ref: 'Comment'
     }
 }, {
-    versionKey: false
+    versionKey: false,
+    timestamps: true
 })
 
 const Comment = mongoose.model('Comment', CommentSchema)

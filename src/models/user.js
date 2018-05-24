@@ -23,7 +23,8 @@ const UserSchema = new mongoose.Schema({
         minlength: 6
     }
 }, {
-    versionKey: false 
+    versionKey: false,
+    timestamps: true
 })
 
 // Define middleware to has password before saving
@@ -34,7 +35,7 @@ UserSchema.pre('save', async function (next) {
 
     const salt = await bcrypt.genSalt(10)
     const password = await bcrypt.hash(user.password, salt)
-    
+
     user.password = password
     next()
 })
@@ -51,9 +52,9 @@ UserSchema.statics.findByCredentials = async (email, password) => {
     const user = await User.findOne({ email })
 
     if (!user) throw new Error('Unable to find user')
-    
+
     const match = await bcrypt.compare(password, user.password)
-    
+
     if (match) {
         return user
     } else {
@@ -65,7 +66,7 @@ UserSchema.statics.findByCredentials = async (email, password) => {
 UserSchema.statics.findByToken = async (token) => {
     const decoded = jwt.verify(token, 'mysecretauth')
     const user = await User.findOne({ _id: decoded._id })
-    
+
     if (user) {
         return user
     } else {

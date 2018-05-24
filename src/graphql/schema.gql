@@ -6,7 +6,7 @@ type Query {
 }
 
 type Mutation {
-    signup(email: String!, password: String!): User!
+    signup(name: String!, email: String!, password: String!): User!
     login(email: String!, password: String!): User!
     createPost(title: String, body: String): Post!
     editPost(_id: ID!, title: String, body: String, published: Boolean): Post!
@@ -22,6 +22,7 @@ type Subscription {
 
 type User {
     _id: ID!
+    name: String!
     email: String!
     authToken: String
     posts: [Post]!

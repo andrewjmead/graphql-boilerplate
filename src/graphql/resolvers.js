@@ -35,8 +35,8 @@ const resolvers = {
         })
     },
     Mutation: {
-        async signup(obj, { email, password }, context) {
-            const user = new User({ email, password })
+        async signup(obj, { name, email, password }, context) {
+            const user = new User({ name, email, password })
             await user.save()
             return user.clean()
         },

@@ -5,40 +5,49 @@ import { withAuth } from './withAuth'
 
 const resolvers = {
     Query: {
-        hello: () => 'Hello!',
-        user: withAuth(async (obj, args, { user }) => {
+        user: async (obj, args, { user }) => {
             return user
-        }),
-        posts: withAuth(async (obj, args, { user }) => {
-            return Post.find({ author: user._id })
-        }),
-        publicPosts: withAuth(async (obj, args, { user }) => {
-            return Post.find({ published: true })
-        })
+        },
+        posts: async (obj, { showOwnPosts }, { user }) => {
+            if (user && showOwnPosts) {
+                // If you're logged in an want to see your own posts
+                return Post.find({ author: user._id })
+            } else {
+                // If you're not logged in
+                return Post.find({ published: true })
+            }
+        }
     },
     User: {
-        posts: withAuth(async (obj, args, { user }) => {
-            return Post.find({ author: user._id })
-        })
+        posts: async (obj, args, { user }) => {
+            const query = { author: obj._id }
+
+            if (!user || obj._id !== user._id) {
+                // If you're looking at someone elses posts
+                query.published = true
+            }
+
+            return Post.find(query)
+        }
     },
     Post: {
-        author: withAuth(async (obj, args, context) => {
+        author: async (obj, args, context) => {
             return User.findById(obj.author)
-        }),
-        comments: withAuth(async (obj, args, context) => {
+        },
+        comments: async (obj, args, context) => {
             return Comment.find({ post: obj._id })
-        })
+        }
     },
     Comment: {
-        parent: withAuth(async (obj, args, context) => {
+        parent: async (obj, args, context) => {
             return Comment.findOne({ _id: obj.parent })
-        }),
-        author: withAuth(async (obj, args, context) => {
+        },
+        author: async (obj, args, context) => {
             return User.findById(obj.author)
-        }),
-        post: withAuth(async (obj, args, context) => {
+        },
+        post: async (obj, args, context) => {
             return Post.findById(obj.post)
-        })
+        }
     },
     Mutation: {
         async signup(obj, { name, email, password }, context) {

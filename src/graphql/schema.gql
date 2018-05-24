@@ -1,8 +1,8 @@
+# I should be able to filters posts and users by id to get an individual one via args
+
 type Query {
     user: User!
-    posts: [Post]!
-    publicPosts: [Post]!
-    hello: String!
+    posts(showOwnPosts: Boolean = false): [Post]!
 }
 
 type Mutation {
@@ -20,10 +20,13 @@ type Subscription {
     count: Int!
 }
 
+directive @upper on FIELD_DEFINITION
+directive @isUser on FIELD_DEFINITION
+
 type User {
     _id: ID!
-    name: String!
-    email: String!
+    name: String! 
+    email: String @isUser
     authToken: String
     posts: [Post]!
 }

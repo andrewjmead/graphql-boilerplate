@@ -4,6 +4,7 @@ import fs from 'fs'
 import path from 'path'
 import { GraphQLServer, PubSub } from 'graphql-yoga'
 import { authMiddleware } from './middleware/auth'
+import { UpperCaseDirective, IsUserDirective } from './graphql/directives'
 
 // Start up the database connection
 import './db/db'
@@ -21,12 +22,14 @@ setInterval(() => {
     pubsub.publish('COUNT', { count: count++ })
 }, 1000)
 
-// TODO - Setup the auth middleware
-
 // Define the GraphQL server
 const server = new GraphQLServer({
     typeDefs: schema,
     resolvers,
+    schemaDirectives: {
+        upper: UpperCaseDirective,
+        isUser: IsUserDirective
+    },
     context({ request }) {
         return {
             pubsub,

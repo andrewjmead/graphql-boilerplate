@@ -23,11 +23,23 @@ type Subscription {
     comments(postId: ID!): Comment!
 }
 
-type User {
+interface UserInterface {
     _id: ID!
     name: String! 
-    email: String @isUser # I don't like this approach because it messes up the sign up request
+    posts: [Post]!
+}
+
+type User implements UserInterface {
+    _id: ID!
+    name: String! 
+    email: String!
     authToken: String
+    posts: [Post]!
+}
+
+type Author implements UserInterface {
+    _id: ID!
+    name: String! 
     posts: [Post]!
 }
 
@@ -36,7 +48,7 @@ type Post {
     title: String!
     body: String!
     published: Boolean!
-    author: User!
+    author: Author!
     comments: [Comment]!
     createdAt: String!
     updatedAt: String!
@@ -47,7 +59,7 @@ type Comment {
     text: String!
     parent: Comment
     post: Post!
-    author: User!
+    author: Author!
     createdAt: String!
     updatedAt: String!
 }

@@ -6,6 +6,7 @@ import { context } from './graphql/context'
 import { resolvers } from './graphql/resolvers'
 
 // Start up the database connection
+import './config/config'
 import './db/db'
 
 // GraphQL schema parser

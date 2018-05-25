@@ -1,3 +1,3 @@
 import mongoose from 'mongoose'
 
-mongoose.connect('mongodb://localhost/graphqlExample');
+mongoose.connect(process.env.DATABASE_URL);

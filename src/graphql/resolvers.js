@@ -49,18 +49,27 @@ const resolvers = {
             return Post.findById(obj.post)
         }
     },
+    UserInterface: {
+        __resolveType(data) {
+            return data.typename
+        }
+    },
     Mutation: {
         async signup(obj, { name, email, password }, context) {
             const user = new User({ name, email, password })
             await user.save()
-            return user.clean()
+            const authToken = user.generateAuthToken()
+            return {
+                ...user.toObject(),
+                authToken
+            }
         },
         async login(obj, { email, password }, context) {
             const user = await User.findByCredentials(email, password)
             const authToken = user.generateAuthToken()
 
             return {
-                ...user.clean(),
+                ...user.toObject(),
                 authToken
             }
         },

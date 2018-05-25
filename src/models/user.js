@@ -43,7 +43,7 @@ UserSchema.pre('save', async function (next) {
 // Define method for generating an auth token
 UserSchema.methods.generateAuthToken = function () {
     const user = this
-    const token = jwt.sign({ _id: user._id, access: 'auth' }, 'mysecretauth').toString();
+    const token = jwt.sign({ _id: user._id, access: 'auth' }, process.env.JWT_SECRET).toString();
     return token
 }
 
@@ -64,7 +64,7 @@ UserSchema.statics.findByCredentials = async (email, password) => {
 
 // Define middleware to find a user by an auth token
 UserSchema.statics.findByToken = async (token) => {
-    const decoded = jwt.verify(token, 'mysecretauth')
+    const decoded = jwt.verify(token, process.env.JWT_SECRET)
     const user = await User.findOne({ _id: decoded._id })
 
     if (user) {
@@ -72,14 +72,6 @@ UserSchema.statics.findByToken = async (token) => {
     } else {
         throw new Error('Unable to find user')
     }
-}
-
-// Override toJSON to remove fields from responses
-UserSchema.methods.clean = function () {
-    const user = this;
-    const objUser = user.toObject()
-    delete objUser.password;
-    return objUser;
 }
 
 const User = mongoose.model('User', UserSchema)

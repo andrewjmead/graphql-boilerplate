@@ -29,6 +29,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "bcryptjs": "^2.4.3",
+    "graphql-request": "^1.6.0",
     "graphql-tools": "^3.0.2",
     "graphql-yoga": "^1.14.0",
     "jsonwebtoken": "^8.2.1",

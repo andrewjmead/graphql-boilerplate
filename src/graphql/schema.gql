@@ -1,8 +1,3 @@
-# I should be able to filters posts and users by id to get an individual one via args
-
-directive @upper on FIELD_DEFINITION
-directive @isUser on FIELD_DEFINITION
-
 type Query {
     user: User!
     posts(showOwnPosts: Boolean = false): [Post]!

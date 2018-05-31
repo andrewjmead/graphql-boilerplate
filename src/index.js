@@ -1,7 +1,6 @@
 import fs from 'fs'
 import path from 'path'
 import { GraphQLServer } from 'graphql-yoga'
-import { UpperCaseDirective, IsUserDirective } from './graphql/directives'
 import { context } from './graphql/context'
 import { resolvers } from './graphql/resolvers'
 
@@ -16,10 +15,6 @@ const typeDefs = fs.readFileSync(path.join(__dirname, './graphql/schema.gql')).t
 const server = new GraphQLServer({
     typeDefs,
     resolvers,
-    schemaDirectives: {
-        upper: UpperCaseDirective,
-        isUser: IsUserDirective
-    },
     context
 })
 

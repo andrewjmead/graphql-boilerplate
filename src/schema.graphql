@@ -1,0 +1,55 @@
+type Query {
+    me: User!
+    drafts (page: Int, pageSize: Int): [Post!]!
+    posts (page: Int, pageSize: Int): [Post!]!
+}
+
+type Mutation {
+    signup(name: String!, email: String!, password: String!): AuthPayload!
+    login(email: String!, password: String!): AuthPayload!
+    createPost(title: String, body: String): Post!
+    editPost(id: ID!, title: String, body: String, published: Boolean): Post!
+    deletePost(id: ID!): Post!
+    createComment(postId: ID!, parentId: ID, text: String!): Comment!
+    editComment(id: ID!, text: String!): Comment!
+    deleteComment(id: ID!): Comment!
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+type Subscription {
+    comments(postId: ID!): Comment!
+}
+
+type User {
+    id: ID!
+    name: String! 
+    email: String
+    posts: [Post]!
+    drafts: [Post]
+    comments: [Comment!]!
+}
+
+type Post {
+    id: ID!
+    title: String!
+    body: String!
+    published: Boolean!
+    author: User!
+    comments: [Comment]!
+    createdAt: String!
+    updatedAt: String!
+}
+
+type Comment {
+    id: ID!
+    text: String!
+    parent: Comment
+    post: Post!
+    author: User!
+    createdAt: String!
+    updatedAt: String!
+}

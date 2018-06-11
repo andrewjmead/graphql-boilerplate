@@ -1,0 +1,56 @@
+{
+  "name": "graphql-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "start": "babel src -d dist && cp ./src/graphql/schema.gql  ./dist/graphql/ && node dist/index.js",
+    "dev": "nodemon src/index.js --ext js,gql --exec babel-node",
+    "get-schema": "graphql get-schema -p database  -e http://localhost:4467 -o src/generated/prisma.graphql --no-all --header Authorization=\"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InNlcnZpY2UiOiJkZWZhdWx0QGRlZmF1bHQiLCJyb2xlcyI6WyJhZG1pbiJdfSwiaWF0IjoxNTI3NzgzNzY3LCJleHAiOjE1MjgzODg1Njd9.zea5QlzFBwxFxzDf_Aj9KuFzjxEx9bEIeWO-y26MbMs\"",
+    "test": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrewjmead/graphql-research-boilerplate.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andrewjmead/graphql-research-boilerplate/issues"
+  },
+  "homepage": "https://github.com/andrewjmead/graphql-research-boilerplate#readme",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^22.4.4",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "bcryptjs": "^2.4.3",
+    "graphql-binding": "^2.1.0",
+    "graphql-cli": "^2.16.0",
+    "graphql-request": "^1.6.0",
+    "graphql-tools": "^3.0.2",
+    "graphql-yoga": "^1.14.0",
+    "jsonwebtoken": "^8.2.1",
+    "mongoose": "^5.1.2",
+    "prisma-binding": "^2.0.2"
+  },
+  "devDependencies": {
+    "apollo-cache-inmemory": "^1.2.1",
+    "apollo-client": "^2.3.1",
+    "apollo-link": "^1.2.2",
+    "apollo-link-http": "^1.5.4",
+    "apollo-link-ws": "^1.0.8",
+    "apollo-utilities": "^1.0.12",
+    "expect": "^22.4.3",
+    "graphql-tag": "^2.9.2",
+    "jest": "^22.4.4",
+    "jest-cli": "^22.4.4",
+    "nodemon": "^1.17.4",
+    "unfetch": "^3.0.0"
+  }
+}

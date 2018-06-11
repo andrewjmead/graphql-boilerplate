@@ -8,9 +8,9 @@ This boilerplate was created using [graphql-yoga](https://github.com/prismagraph
 
 1. Clone the repo
 
-2. Run `npm install`
+1. Run `npm install`
 
-3. Set up a config file. Here's an example for your dev and test environments.
+1. Set up a config file. Here's an example for your dev and test environments.
 
 ```json
 {
@@ -25,9 +25,18 @@ This boilerplate was created using [graphql-yoga](https://github.com/prismagraph
 }
 ```
 
-4. Run `npm run dev` to start up the development environment
+1. Start up the prisma service
 
-5. Head over to `localhost:3000` to make some GraphQL requests using GraphQL Playground
+```sh
+cd prisma
+docker-compose up -d
+cd ..
+yarn prisma deploy
+```
+
+1. Run `npm run dev` to start up the development environment
+
+1. Head over to `localhost:3000` to make some GraphQL requests using GraphQL Playground
 
 ## Get Started with Tests
 
@@ -36,6 +45,7 @@ This boilerplate was created using [graphql-yoga](https://github.com/prismagraph
 ## To Add
 
 - [ ] Testing
+- [ ] Come up with a prod system where the prisma secret is set via an env var
 
 ## The MIT License
 

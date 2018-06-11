@@ -1,0 +1,8 @@
+endpoint: http://localhost:4467
+datamodel: datamodel.graphql
+# secret: my-super-secret-secret
+
+# Ensure we update out local schema if we deploy the app
+hooks:
+  post-deploy:
+    - npm run get-schema

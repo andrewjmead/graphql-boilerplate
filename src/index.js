@@ -4,12 +4,12 @@ import { GraphQLServer } from 'graphql-yoga'
 import { PubSub } from 'graphql-yoga'
 import { Prisma } from 'prisma-binding'
 
-import './config/config'
+import './config'
 import { resolvers, fragmentReplacements } from './resolvers/index'
 
 const prisma = new Prisma({
     typeDefs: 'src/generated/prisma.graphql',
-    endpoint: 'http://localhost:4467',
+    endpoint: process.env.PRISMA_ENDPOINT,
     secret: 'my-super-secret-secret',
     fragmentReplacements
 })

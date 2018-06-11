@@ -1,0 +1,18 @@
+version: '3'
+services:
+  prisma:
+    image: prismagraphql/prisma:1.8
+    restart: always
+    ports:
+    - "4467:4467"
+    environment:
+      PRISMA_CONFIG: |
+        port: 4467
+        databases:
+          default:
+            connector: postgres
+            host: host.docker.internal
+            port: 5432
+            user: postgres
+            password: postgres
+            migrations: true

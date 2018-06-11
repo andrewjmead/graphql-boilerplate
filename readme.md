@@ -35,9 +35,7 @@ This boilerplate was created using [graphql-yoga](https://github.com/prismagraph
 
 ## To Add
 
-- [ ] Pagination
 - [ ] Testing
-- [ ] Example front-end (different repo)
 
 ## The MIT License
 

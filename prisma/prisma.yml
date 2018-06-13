@@ -1,6 +1,6 @@
-endpoint: http://localhost:4467
+endpoint: ${env:PRISMA_ENDPOINT}
 datamodel: datamodel.graphql
-# secret: my-super-secret-secret
+secret: ${env:PRISMA_ENDPOINT}
 
 # Ensure we update out local schema if we deploy the app
 hooks:

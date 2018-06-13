@@ -13,7 +13,7 @@ type Post {
     body: String!
     published: Boolean!
     author: User!
-    comments: [Comment!]!
+    comments: [Comment!]! # TODO - set up cascading removal
     createdAt: DateTime!
     updatedAt: DateTime!
 }

@@ -10,20 +10,10 @@ This boilerplate was created using [graphql-yoga](https://github.com/prismagraph
 
 1. Run `npm install`
 
-1. Set up a config file. Here's an example for your dev and test environments.
+1. Set up `config/dev.env` and `config/test.env`
 
-```json
-{
-    "development": {
-        "DATABASE_URL": "mongodb://localhost/graphql-blog-dev",
-        "JWT_SECRET": "abc123098!!!"
-    },
-    "test": {
-        "DATABASE_URL": "mongodb://localhost/graphql-blog-test",
-        "JWT_SECRET": "abc123098!!!"
-    }
-}
-```
+PRISMA_ENDPOINT=http://localhost:4467/default/test
+JWT_SECRET=somesecret
 
 1. Start up the prisma service
 
@@ -31,7 +21,8 @@ This boilerplate was created using [graphql-yoga](https://github.com/prismagraph
 cd prisma
 docker-compose up -d
 cd ..
-yarn prisma deploy
+npm run deploy:dev
+npm run deploy:test
 ```
 
 1. Run `npm run dev` to start up the development environment
@@ -41,11 +32,6 @@ yarn prisma deploy
 ## Get Started with Tests
 
 1. Run `npm test` to execute the jest test suite
-
-## To Add
-
-- [ ] Testing
-- [ ] Come up with a prod system where the prisma secret is set via an env var
 
 ## The MIT License
 

@@ -8,10 +8,10 @@ import fetch from 'unfetch'
 
 // Setup the links for the apollo client
 const port = process.env.PORT || 3000
-const httpLink = createHttpLink({ uri: `http://localhost:${port}/`, fetch })
+const httpLink = createHttpLink({ uri: `http://localhost:${port}`, fetch })
 const cache = new InMemoryCache()
 const wsLink = new WebSocketLink({
-    uri: `ws://localhost:${port}/`,
+    uri: `ws://localhost:${port}`,
     options: {
         reconnect: true
     }

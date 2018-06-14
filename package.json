@@ -40,7 +40,8 @@
     "graphql-yoga": "^1.14.0",
     "jsonwebtoken": "^8.2.1",
     "mongoose": "^5.1.2",
-    "prisma-binding": "^2.0.2"
+    "prisma-binding": "^2.0.2",
+    "uuid": "^3.2.1"
   },
   "devDependencies": {
     "apollo-cache-inmemory": "^1.2.1",
